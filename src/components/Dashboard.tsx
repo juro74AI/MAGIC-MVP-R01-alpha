@@ -48,8 +48,8 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
           <p className="text-sm font-medium text-gray-600 dark:text-gray-400 truncate">{title}</p>
           <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
         </div>
-        <div className={`p-2 sm:p-3 rounded-lg ${color} flex-shrink-0 ml-3`}>
-          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+        <div className={`p-2 rounded-lg ${color} flex-shrink-0 ml-3`}>
+          <Icon className="w-4 h-4 text-white" />
         </div>
       </div>
     </div>
