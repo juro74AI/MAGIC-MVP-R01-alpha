@@ -54,7 +54,13 @@ function App() {
   const renderCurrentView = () => {
     switch (currentView) {
       case 'dashboard':
-        return <Dashboard applications={applications} onViewChange={handleViewChange} />;
+        return (
+          <Dashboard 
+            applications={applications} 
+            onViewChange={handleViewChange}
+            onViewApplication={handleViewApplication}
+          />
+        );
       
       case 'applications':
         return (
@@ -116,7 +122,13 @@ function App() {
         );
       
       default:
-        return <Dashboard applications={applications} onViewChange={handleViewChange} />;
+        return (
+          <Dashboard 
+            applications={applications} 
+            onViewChange={handleViewChange}
+            onViewApplication={handleViewApplication}
+          />
+        );
     }
   };
 

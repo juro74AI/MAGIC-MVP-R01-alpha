@@ -6,9 +6,10 @@ import { getStatusColor, getComplianceColor } from '../utils/helpers';
 interface DashboardProps {
   applications: Application[];
   onViewChange: (view: string) => void;
+  onViewApplication?: (application: Application) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => {
+const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange, onViewApplication }) => {
   // Calculate stats from actual applications
   const stats = {
     totalApplications: applications.length,
@@ -60,7 +61,11 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">IAM Compliance Overview</h3>
       <div className="space-y-3 sm:space-y-4">
         {applications.slice(0, 5).map((app) => (
-          <div key={app.id} className="flex items-center justify-between">
+          <div 
+            key={app.id} 
+            className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors"
+            onClick={() => onViewApplication?.(app)}
+          >
             <div className="min-w-0 flex-1">
               <p className="font-medium text-gray-900 dark:text-white text-sm sm:text-base truncate">{app.name}</p>
               <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">{app.code}</p>
@@ -197,7 +202,11 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
         <div className="p-4 sm:p-6">
           <div className="space-y-3 sm:space-y-4">
             {applications.slice(0, 5).map((app) => (
-              <div key={app.id} className="flex items-center justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors">
+              <div 
+                key={app.id} 
+                className="flex items-center justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+                onClick={() => onViewApplication?.(app)}
+              >
                 <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Server className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400" />
