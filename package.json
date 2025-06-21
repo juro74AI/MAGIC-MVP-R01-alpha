@@ -9,7 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "npm run generate-cert && vite preview --https --host 0.0.0.0",
-    "generate-cert": "node generate-cert.js"
+    "generate-cert": "node generate-cert.cjs"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
