@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange }) 
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-gray-900">MAGIC</h1>
-                  <p className="text-sm text-gray-500">Management and Governance of Internal Components</p>
+                  <p className="text-sm text-gray-500">My Application Governance Information and Compliance</p>
                 </div>
               </div>
             </div>
