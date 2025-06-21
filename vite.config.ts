@@ -10,6 +10,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5173,
+    https: true, // Active HTTPS avec certificats auto-signés
     allowedHosts: [
       'ip125.ip-51-38-13.eu',
       '51.38.13.125',
@@ -21,5 +22,6 @@ export default defineConfig({
   preview: {
     host: '0.0.0.0',
     port: 4173,
+    https: true, // Active HTTPS pour le preview aussi
   }
 });
