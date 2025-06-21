@@ -10,5 +10,11 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5173,
+    allowedHosts: [
+      'ip125.ip-51-38-13.eu',
+      '51.38.13.125',
+      'localhost',
+      '127.0.0.1'
+    ],
   },
 });
