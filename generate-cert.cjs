@@ -11,8 +11,8 @@ if (!fs.existsSync(certsDir)) {
 // Générer le certificat auto-signé avec Node.js
 const forge = require('node-forge');
 
-// Générer une paire de clés RSA
-const keys = forge.pki.rsa.generateKeyPair(2048);
+// Générer une paire de clés RSA avec workers: 0 pour éviter les problèmes de worker
+const keys = forge.pki.rsa.generateKeyPair({ bits: 2048, workers: 0 });
 
 // Créer un certificat
 const cert = forge.pki.createCertificate();
