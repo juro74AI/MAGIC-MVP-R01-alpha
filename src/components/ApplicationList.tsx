@@ -154,48 +154,63 @@ const ApplicationList: React.FC<ApplicationListProps> = ({ applications, onViewA
       </div>
 
       {/* Applications Table - Desktop */}
-      <div className="hidden lg:block bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden transition-colors">
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+      <div className="hidden lg:block bg-white dark:bg-gray-800 rounded-lg shadow-sm transition-colors">
+        <div className="w-full">
+          <table className="w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+                  className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 w-1/4"
                   onClick={() => handleSort('name')}
                 >
-                  Application {sortField === 'name' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <div className="flex items-center space-x-1">
+                    <span>Application</span>
+                    {sortField === 'name' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
+                  </div>
                 </th>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+                  className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 w-1/6"
                   onClick={() => handleSort('entity')}
                 >
-                  Entity {sortField === 'entity' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <div className="flex items-center space-x-1">
+                    <span>Entity</span>
+                    {sortField === 'entity' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
+                  </div>
                 </th>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+                  className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 w-1/6"
                   onClick={() => handleSort('applicationOwner')}
                 >
-                  Owner {sortField === 'applicationOwner' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <div className="flex items-center space-x-1">
+                    <span>Owner</span>
+                    {sortField === 'applicationOwner' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
+                  </div>
                 </th>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+                  className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 w-1/8"
                   onClick={() => handleSort('environment')}
                 >
-                  Environment {sortField === 'environment' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <div className="flex items-center space-x-1">
+                    <span>Env</span>
+                    {sortField === 'environment' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
+                  </div>
                 </th>
                 <th 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+                  className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 w-1/8"
                   onClick={() => handleSort('status')}
                 >
-                  Status {sortField === 'status' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  <div className="flex items-center space-x-1">
+                    <span>Status</span>
+                    {sortField === 'status' && <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>}
+                  </div>
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-1/12">
                   Compliance
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-1/8">
                   Updated
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-1/12">
                   Actions
                 </th>
               </tr>
@@ -203,41 +218,41 @@ const ApplicationList: React.FC<ApplicationListProps> = ({ applications, onViewA
             <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
               {paginatedApplications.map((app) => (
                 <tr key={app.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-4 py-4">
                     <div className="flex items-center">
-                      <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                      <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
                         <Server className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                       </div>
-                      <div>
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">{app.name}</div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">{app.code}</div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white truncate">{app.name}</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{app.code}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                    {app.entity}
+                  <td className="px-4 py-4 text-sm text-gray-900 dark:text-white">
+                    <div className="truncate">{app.entity}</div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                    {app.applicationOwner}
+                  <td className="px-4 py-4 text-sm text-gray-900 dark:text-white">
+                    <div className="truncate">{app.applicationOwner}</div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                    {app.environment}
+                  <td className="px-4 py-4 text-sm text-gray-900 dark:text-white">
+                    <div className="truncate">{app.environment}</div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-4 py-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(app.status)}`}>
                       {app.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`font-semibold ${getComplianceColor(app.iamCompliance.overallScore)}`}>
+                  <td className="px-4 py-4">
+                    <span className={`font-semibold text-sm ${getComplianceColor(app.iamCompliance.overallScore)}`}>
                       {app.iamCompliance.overallScore}%
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                    {formatDate(app.updatedAt)}
+                  <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="truncate">{formatDate(app.updatedAt)}</div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex items-center justify-end space-x-2">
+                  <td className="px-4 py-4 text-right">
+                    <div className="flex items-center justify-end space-x-1">
                       <button
                         onClick={() => onViewApplication(app)}
                         className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors p-1"
