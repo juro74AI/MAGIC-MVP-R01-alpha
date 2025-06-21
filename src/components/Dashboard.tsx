@@ -40,13 +40,13 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
     onClick?: () => void;
   }> = ({ title, value, icon: Icon, color, onClick }) => (
     <div 
-      className={`bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow ${onClick ? 'cursor-pointer' : ''}`}
+      className={`bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm hover:shadow-md transition-all ${onClick ? 'cursor-pointer' : ''}`}
       onClick={onClick}
     >
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="text-2xl font-bold text-gray-900">{value}</p>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
         </div>
         <div className={`p-3 rounded-lg ${color}`}>
           <Icon className="w-6 h-6 text-white" />
@@ -56,14 +56,14 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
   );
 
   const ComplianceChart: React.FC = () => (
-    <div className="bg-white p-6 rounded-lg shadow-sm">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">IAM Compliance Overview</h3>
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm transition-colors">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">IAM Compliance Overview</h3>
       <div className="space-y-4">
         {applications.slice(0, 5).map((app) => (
           <div key={app.id} className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-gray-900">{app.name}</p>
-              <p className="text-sm text-gray-500">{app.code}</p>
+              <p className="font-medium text-gray-900 dark:text-white">{app.name}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{app.code}</p>
             </div>
             <div className="flex items-center space-x-3">
               <div className="flex space-x-1">
@@ -79,11 +79,11 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
           </div>
         ))}
         {applications.length === 0 && (
-          <div className="text-center py-8 text-gray-500">
+          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
             <p>No applications registered yet.</p>
             <button
               onClick={() => onViewChange('add-application')}
-              className="mt-2 text-blue-600 hover:text-blue-700 font-medium"
+              className="mt-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
             >
               Add your first application →
             </button>
@@ -102,35 +102,35 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
     }), { critical: 0, high: 0, medium: 0, low: 0 });
 
     return (
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Security Vulnerabilities</h3>
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm transition-colors">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Security Vulnerabilities</h3>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex items-center space-x-3">
             <div className="w-4 h-4 bg-red-500 rounded"></div>
             <div>
-              <p className="text-sm text-gray-600">Critical</p>
-              <p className="text-xl font-bold text-gray-900">{totalVulns.critical}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Critical</p>
+              <p className="text-xl font-bold text-gray-900 dark:text-white">{totalVulns.critical}</p>
             </div>
           </div>
           <div className="flex items-center space-x-3">
             <div className="w-4 h-4 bg-orange-500 rounded"></div>
             <div>
-              <p className="text-sm text-gray-600">High</p>
-              <p className="text-xl font-bold text-gray-900">{totalVulns.high}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">High</p>
+              <p className="text-xl font-bold text-gray-900 dark:text-white">{totalVulns.high}</p>
             </div>
           </div>
           <div className="flex items-center space-x-3">
             <div className="w-4 h-4 bg-yellow-500 rounded"></div>
             <div>
-              <p className="text-sm text-gray-600">Medium</p>
-              <p className="text-xl font-bold text-gray-900">{totalVulns.medium}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Medium</p>
+              <p className="text-xl font-bold text-gray-900 dark:text-white">{totalVulns.medium}</p>
             </div>
           </div>
           <div className="flex items-center space-x-3">
             <div className="w-4 h-4 bg-blue-500 rounded"></div>
             <div>
-              <p className="text-sm text-gray-600">Low</p>
-              <p className="text-xl font-bold text-gray-900">{totalVulns.low}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Low</p>
+              <p className="text-xl font-bold text-gray-900 dark:text-white">{totalVulns.low}</p>
             </div>
           </div>
         </div>
@@ -141,8 +141,8 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900">Dashboard</h2>
-        <p className="text-gray-600">Overview of your application portfolio and compliance status</p>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h2>
+        <p className="text-gray-600 dark:text-gray-400">Overview of your application portfolio and compliance status</p>
       </div>
 
       {/* Stats Grid */}
@@ -182,13 +182,13 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
       </div>
 
       {/* Recent Applications */}
-      <div className="bg-white rounded-lg shadow-sm">
-        <div className="p-6 border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm transition-colors">
+        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-gray-900">Recent Applications</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Applications</h3>
             <button
               onClick={() => onViewChange('applications')}
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+              className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
             >
               View all →
             </button>
@@ -197,14 +197,14 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
         <div className="p-6">
           <div className="space-y-4">
             {applications.slice(0, 5).map((app) => (
-              <div key={app.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={app.id} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors">
                 <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Server className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                    <Server className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">{app.name}</p>
-                    <p className="text-sm text-gray-500">{app.code} • {app.entity}</p>
+                    <p className="font-medium text-gray-900 dark:text-white">{app.name}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{app.code} • {app.entity}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -218,11 +218,11 @@ const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => 
               </div>
             ))}
             {applications.length === 0 && (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                 <p>No applications registered yet.</p>
                 <button
                   onClick={() => onViewChange('add-application')}
-                  className="mt-2 text-blue-600 hover:text-blue-700 font-medium"
+                  className="mt-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
                 >
                   Add your first application →
                 </button>

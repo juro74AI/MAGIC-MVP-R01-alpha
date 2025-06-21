@@ -1,5 +1,6 @@
 import React from 'react';
-import { Server, Users, Shield, BarChart3, Plus, Search, Settings } from 'lucide-react';
+import { Server, Users, Shield, BarChart3, Plus, Search, Settings, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,6 +9,8 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange }) => {
+  const { isDark, toggleTheme } = useTheme();
+
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
     { id: 'applications', label: 'Applications', icon: Server },
@@ -19,9 +22,9 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange }) 
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
@@ -30,14 +33,26 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange }) 
                   <Server className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900">MAGIC</h1>
-                  <p className="text-sm text-gray-500">My Application Governance Information and Compliance</p>
+                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">MAGIC</h1>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">My Application Governance Information and Compliance</p>
                 </div>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                <Users className="w-4 h-4 text-gray-600" />
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDark ? (
+                  <Sun className="w-5 h-5 text-yellow-500" />
+                ) : (
+                  <Moon className="w-5 h-5 text-gray-600" />
+                )}
+              </button>
+              <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                <Users className="w-4 h-4 text-gray-600 dark:text-gray-300" />
               </div>
             </div>
           </div>
@@ -48,7 +63,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange }) 
         <div className="flex gap-8">
           {/* Sidebar */}
           <aside className="w-64 flex-shrink-0">
-            <nav className="bg-white rounded-lg shadow-sm p-4">
+            <nav className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 transition-colors">
               <ul className="space-y-2">
                 {menuItems.map((item) => {
                   const Icon = item.icon;
@@ -58,8 +73,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewChange }) 
                         onClick={() => onViewChange(item.id)}
                         className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
                           currentView === item.id
-                            ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-700'
-                            : 'text-gray-700 hover:bg-gray-50'
+                            ? 'bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-l-4 border-blue-700 dark:border-blue-400'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                         }`}
                       >
                         <Icon className="w-5 h-5" />

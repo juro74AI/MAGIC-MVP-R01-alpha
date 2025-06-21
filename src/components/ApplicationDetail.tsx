@@ -13,15 +13,15 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
   const totalVulnerabilities = Object.values(application.vulnerabilities).reduce((sum, count) => sum + count, 0);
 
   const ComplianceIndicator: React.FC<{ label: string; status: boolean }> = ({ label, status }) => (
-    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-      <span className="text-sm font-medium text-gray-700">{label}</span>
+    <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{label}</span>
       <div className="flex items-center space-x-2">
         {status ? (
-          <CheckCircle className="w-5 h-5 text-green-600" />
+          <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
         ) : (
-          <XCircle className="w-5 h-5 text-red-600" />
+          <XCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
         )}
-        <span className={`text-sm font-medium ${status ? 'text-green-600' : 'text-red-600'}`}>
+        <span className={`text-sm font-medium ${status ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
           {status ? 'Connected' : 'Not Connected'}
         </span>
       </div>
@@ -33,10 +33,10 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
     return (
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-gray-700 capitalize">{level}</span>
-          <span className="text-sm font-bold text-gray-900">{count}</span>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300 capitalize">{level}</span>
+          <span className="text-sm font-bold text-gray-900 dark:text-white">{count}</span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
           <div
             className={`h-2 rounded-full ${getVulnerabilityColor(level)}`}
             style={{ width: `${percentage}%` }}
@@ -53,13 +53,13 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
         <div className="flex items-center space-x-4">
           <button
             onClick={onBack}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-5 h-5 text-gray-600 dark:text-gray-400" />
           </button>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">{application.name}</h2>
-            <p className="text-gray-600">{application.code}</p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{application.name}</h2>
+            <p className="text-gray-600 dark:text-gray-400">{application.code}</p>
           </div>
         </div>
         <button
@@ -74,56 +74,56 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* General Information */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">General Information</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">General Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-500">Description</label>
-                <p className="mt-1 text-sm text-gray-900">{application.shortDescription}</p>
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">Description</label>
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">{application.shortDescription}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-500">Entity</label>
-                <p className="mt-1 text-sm text-gray-900">{application.entity}</p>
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">Entity</label>
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">{application.entity}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-500">Owner Team</label>
-                <p className="mt-1 text-sm text-gray-900">{application.ownerTeam}</p>
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">Owner Team</label>
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">{application.ownerTeam}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-500">Application Owner</label>
-                <p className="mt-1 text-sm text-gray-900">{application.applicationOwner}</p>
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">Application Owner</label>
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">{application.applicationOwner}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-500">Environment</label>
-                <p className="mt-1 text-sm text-gray-900">{application.environment}</p>
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">Environment</label>
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">{application.environment}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-500">Status</label>
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">Status</label>
                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(application.status)}`}>
                   {application.status}
                 </span>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-500">Created</label>
-                <p className="mt-1 text-sm text-gray-900">{formatDate(application.createdAt)}</p>
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">Created</label>
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">{formatDate(application.createdAt)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-500">Last Updated</label>
-                <p className="mt-1 text-sm text-gray-900">{formatDate(application.updatedAt)}</p>
+                <label className="block text-sm font-medium text-gray-500 dark:text-gray-400">Last Updated</label>
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">{formatDate(application.updatedAt)}</p>
               </div>
             </div>
 
             {/* Custom Fields */}
             {Object.keys(application.customFields).length > 0 && (
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <h4 className="text-sm font-medium text-gray-900 mb-3">Custom Fields</h4>
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Custom Fields</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {Object.entries(application.customFields).map(([key, value]) => (
                     <div key={key}>
-                      <label className="block text-sm font-medium text-gray-500 capitalize">
+                      <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
                         {key.replace(/([A-Z])/g, ' $1').trim()}
                       </label>
-                      <p className="mt-1 text-sm text-gray-900">{String(value)}</p>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-white">{String(value)}</p>
                     </div>
                   ))}
                 </div>
@@ -132,17 +132,17 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
           </div>
 
           {/* Servers */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
               <Server className="w-5 h-5 mr-2" />
               Associated Servers ({application.servers.length})
             </h3>
             <div className="space-y-3">
               {application.servers.map((server) => (
-                <div key={server.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={server.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">{server.name}</p>
-                    <p className="text-sm text-gray-500">{server.osVersion}</p>
+                    <p className="font-medium text-gray-900 dark:text-white">{server.name}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{server.osVersion}</p>
                   </div>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(server.status)}`}>
                     {server.status}
@@ -153,17 +153,17 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
           </div>
 
           {/* Service Accounts */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
               <Users className="w-5 h-5 mr-2" />
               Service Accounts ({application.serviceAccounts.length})
             </h3>
             <div className="space-y-3">
               {application.serviceAccounts.map((account) => (
-                <div key={account.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={account.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">{account.name}</p>
-                    <p className="text-sm text-gray-500">{account.type}</p>
+                    <p className="font-medium text-gray-900 dark:text-white">{account.name}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{account.type}</p>
                   </div>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(account.status)}`}>
                     {account.status}
@@ -177,14 +177,14 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Security Vulnerabilities */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
               <AlertTriangle className="w-5 h-5 mr-2" />
               Security Vulnerabilities
             </h3>
             <div className="text-center mb-4">
-              <p className="text-3xl font-bold text-gray-900">{totalVulnerabilities}</p>
-              <p className="text-sm text-gray-500">Total Vulnerabilities</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white">{totalVulnerabilities}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Total Vulnerabilities</p>
             </div>
             <div className="space-y-4">
               <VulnerabilityBar level="critical" count={application.vulnerabilities.critical} total={totalVulnerabilities} />
@@ -195,8 +195,8 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
           </div>
 
           {/* IAM Compliance */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
               <Shield className="w-5 h-5 mr-2" />
               IAM Compliance
             </h3>
@@ -204,7 +204,7 @@ const ApplicationDetail: React.FC<ApplicationDetailProps> = ({ application, onBa
               <p className={`text-3xl font-bold ${getComplianceColor(application.iamCompliance.overallScore)}`}>
                 {application.iamCompliance.overallScore}%
               </p>
-              <p className="text-sm text-gray-500">Overall Score</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Overall Score</p>
             </div>
             <div className="space-y-3">
               <ComplianceIndicator 
