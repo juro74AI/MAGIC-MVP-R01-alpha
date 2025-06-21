@@ -12,7 +12,7 @@ if (!fs.existsSync(certsDir)) {
 const forge = require('node-forge');
 
 // Générer une paire de clés RSA de manière synchrone pour éviter les problèmes de worker
-const keys = forge.pki.rsa.generateKeyPairSync(2048);
+const keys = forge.pki.rsa.generateKeyPairSync({ bits: 2048 });
 
 // Créer un certificat
 const cert = forge.pki.createCertificate();
