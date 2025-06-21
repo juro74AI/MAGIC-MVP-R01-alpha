@@ -1,14 +1,36 @@
 import React from 'react';
 import { Server, Shield, AlertTriangle, CheckCircle, TrendingUp, Users } from 'lucide-react';
-import { mockDashboardStats, mockApplications } from '../data/mockData';
+import { Application } from '../types';
 import { getStatusColor, getComplianceColor } from '../utils/helpers';
 
 interface DashboardProps {
+  applications: Application[];
   onViewChange: (view: string) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onViewChange }) => {
-  const stats = mockDashboardStats;
+const Dashboard: React.FC<DashboardProps> = ({ applications, onViewChange }) => {
+  // Calculate stats from actual applications
+  const stats = {
+    totalApplications: applications.length,
+    applicationsByStatus: {
+      Production: applications.filter(app => app.status === 'Production').length,
+      Draft: applications.filter(app => app.status === 'Draft').length,
+      Decom: applications.filter(app => app.status === 'Decom').length
+    },
+    applicationsByEnvironment: {
+      Production: applications.filter(app => app.environment === 'Production').length,
+      Staging: applications.filter(app => app.environment === 'Staging').length,
+      Development: applications.filter(app => app.environment === 'Development').length,
+      Testing: applications.filter(app => app.environment === 'Testing').length
+    },
+    complianceScore: applications.length > 0 ? Math.round(
+      applications.reduce((sum, app) => sum + app.iamCompliance.overallScore, 0) / applications.length
+    ) : 0,
+    totalVulnerabilities: applications.reduce(
+      (sum, app) => sum + app.vulnerabilities.critical + app.vulnerabilities.high + app.vulnerabilities.medium + app.vulnerabilities.low,
+      0
+    )
+  };
 
   const StatCard: React.FC<{
     title: string;
@@ -37,7 +59,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onViewChange }) => {
     <div className="bg-white p-6 rounded-lg shadow-sm">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">IAM Compliance Overview</h3>
       <div className="space-y-4">
-        {mockApplications.map((app) => (
+        {applications.slice(0, 5).map((app) => (
           <div key={app.id} className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">{app.name}</p>
@@ -56,12 +78,23 @@ const Dashboard: React.FC<DashboardProps> = ({ onViewChange }) => {
             </div>
           </div>
         ))}
+        {applications.length === 0 && (
+          <div className="text-center py-8 text-gray-500">
+            <p>No applications registered yet.</p>
+            <button
+              onClick={() => onViewChange('add-application')}
+              className="mt-2 text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Add your first application →
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 
   const VulnerabilityOverview: React.FC = () => {
-    const totalVulns = mockApplications.reduce((sum, app) => ({
+    const totalVulns = applications.reduce((sum, app) => ({
       critical: sum.critical + app.vulnerabilities.critical,
       high: sum.high + app.vulnerabilities.high,
       medium: sum.medium + app.vulnerabilities.medium,
@@ -163,7 +196,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onViewChange }) => {
         </div>
         <div className="p-6">
           <div className="space-y-4">
-            {mockApplications.slice(0, 5).map((app) => (
+            {applications.slice(0, 5).map((app) => (
               <div key={app.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-4">
                   <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -184,6 +217,17 @@ const Dashboard: React.FC<DashboardProps> = ({ onViewChange }) => {
                 </div>
               </div>
             ))}
+            {applications.length === 0 && (
+              <div className="text-center py-8 text-gray-500">
+                <p>No applications registered yet.</p>
+                <button
+                  onClick={() => onViewChange('add-application')}
+                  className="mt-2 text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  Add your first application →
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

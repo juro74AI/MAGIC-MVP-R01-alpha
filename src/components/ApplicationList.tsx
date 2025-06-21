@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Filter, Eye, Edit, Trash2, Server, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Application } from '../types';
-import { mockApplications } from '../data/mockData';
 import { formatDate, getStatusColor, getComplianceColor } from '../utils/helpers';
 
 interface ApplicationListProps {
+  applications: Application[];
   onViewApplication: (application: Application) => void;
   onEditApplication: (application: Application) => void;
 }
 
-const ApplicationList: React.FC<ApplicationListProps> = ({ onViewApplication, onEditApplication }) => {
+const ApplicationList: React.FC<ApplicationListProps> = ({ applications, onViewApplication, onEditApplication }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [environmentFilter, setEnvironmentFilter] = useState('');
@@ -29,7 +29,7 @@ const ApplicationList: React.FC<ApplicationListProps> = ({ onViewApplication, on
   };
 
   const filteredAndSortedApplications = useMemo(() => {
-    let filtered = mockApplications.filter(app => {
+    let filtered = applications.filter(app => {
       const matchesSearch = searchTerm === '' || 
         app.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         app.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -61,15 +61,15 @@ const ApplicationList: React.FC<ApplicationListProps> = ({ onViewApplication, on
     });
 
     return filtered;
-  }, [searchTerm, statusFilter, environmentFilter, entityFilter, sortField, sortDirection]);
+  }, [applications, searchTerm, statusFilter, environmentFilter, entityFilter, sortField, sortDirection]);
 
   const totalPages = Math.ceil(filteredAndSortedApplications.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedApplications = filteredAndSortedApplications.slice(startIndex, startIndex + itemsPerPage);
 
-  const uniqueStatuses = [...new Set(mockApplications.map(app => app.status))];
-  const uniqueEnvironments = [...new Set(mockApplications.map(app => app.environment))];
-  const uniqueEntities = [...new Set(mockApplications.map(app => app.entity))];
+  const uniqueStatuses = [...new Set(applications.map(app => app.status))];
+  const uniqueEnvironments = [...new Set(applications.map(app => app.environment))];
+  const uniqueEntities = [...new Set(applications.map(app => app.entity))];
 
   const clearFilters = () => {
     setSearchTerm('');
