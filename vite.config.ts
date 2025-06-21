@@ -13,6 +13,7 @@ export default defineConfig({
     allowedHosts: [
       'ip125.ip-51-38-13.eu',
       '51.38.13.125',
+      'magic.red-ark.com',
       'localhost',
       '127.0.0.1'
     ],
