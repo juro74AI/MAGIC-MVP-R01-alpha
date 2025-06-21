@@ -8,6 +8,6 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
-    allowedHosts: ['ip125.ip-51-38-13.eu'],
+    allowedHosts: ['ip125.ip-51-38-13.eu', '51.38.13.125'],
   },
 });
