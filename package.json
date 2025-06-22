@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "sudo vite --host 0.0.0.0",
-    "start": "sudo vite --host 0.0.0.0",
+    "dev": "vite --host 0.0.0.0",
+    "start": "vite --host 0.0.0.0",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "sudo vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",

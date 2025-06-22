@@ -24,21 +24,19 @@ Une application web moderne pour la gestion et la gouvernance des applications d
 
 ```bash
 npm install
-sudo npm run dev
+npm run dev
 ```
 
 ## 🔧 Scripts Disponibles
 
-- `sudo npm run dev` : Démarre le serveur de développement HTTPS sur le port 443
+- `npm run dev` : Démarre le serveur de développement HTTPS sur le port 5173
 - `npm run build` : Build de production
-- `sudo npm run preview` : Prévisualisation du build en HTTPS sur le port 443
+- `npm run preview` : Prévisualisation du build en HTTPS sur le port 4173
 - `npm run lint` : Vérification du code avec ESLint
-
-⚠️ **Note importante** : Le port 443 nécessite des privilèges administrateur, d'où l'utilisation de `sudo`.
 
 ## 🔐 Configuration SSL
 
-L'application utilise des certificats SSL personnalisés pour le développement HTTPS sur le port 443 (port HTTPS standard).
+L'application utilise des certificats SSL personnalisés pour le développement HTTPS.
 
 ### Génération des certificats
 
@@ -55,9 +53,9 @@ Les certificats sont configurés pour :
 
 ## 🌐 Accès
 
-- **Local HTTPS** : https://localhost (port 443 par défaut)
-- **Domaine HTTPS** : https://magic.red-ark.com (si configuré dans /etc/hosts)
-- **Réseau HTTPS** : https://[votre-ip]
+- **Local HTTPS** : https://localhost:5173
+- **Domaine HTTPS** : https://magic.red-ark.com:5173 (si configuré dans /etc/hosts)
+- **Réseau HTTPS** : https://[votre-ip]:5173
 
 ⚠️ **Note HTTPS** : Le navigateur affichera un avertissement de sécurité car nous utilisons des certificats auto-signés. Cliquez sur "Avancé" puis "Continuer vers localhost" pour accéder à l'application.
 
@@ -89,28 +87,6 @@ certs/                 # Certificats SSL (ignorés par Git)
 - Les certificats SSL sont ignorés par Git pour des raisons de sécurité
 - Utilisez des certificats valides en production
 - Les certificats auto-signés sont uniquement pour le développement
-- Le port 443 nécessite des privilèges administrateur
-
-## 🚨 Privilèges Administrateur
-
-Le port 443 étant un port privilégié (< 1024), vous devez :
-
-### Sur Linux/macOS :
-```bash
-sudo npm run dev
-```
-
-### Sur Windows (PowerShell en tant qu'administrateur) :
-```bash
-npm run dev
-```
-
-### Alternative sans sudo
-
-Si vous préférez éviter sudo, vous pouvez :
-1. Utiliser un port non-privilégié comme 8443
-2. Configurer un reverse proxy (nginx, Apache)
-3. Utiliser des outils comme `authbind` sur Linux
 
 ---
 
