@@ -13,7 +13,7 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 5173,
+    port: 443,
     allowedHosts: ['magic.red-ark.com', 'localhost', '127.0.0.1'],
     https: {
       key: fs.readFileSync(path.resolve(__dirname, 'certs/key.pem')),
@@ -22,7 +22,7 @@ export default defineConfig({
   },
   preview: {
     host: '0.0.0.0',
-    port: 4173,
+    port: 443,
     allowedHosts: ['magic.red-ark.com', 'localhost', '127.0.0.1'],
     https: {
       key: fs.readFileSync(path.resolve(__dirname, 'certs/key.pem')),
